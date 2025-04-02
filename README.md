@@ -1,2 +1,12 @@
 # CNN-Cancer-Detection
-Convolutional Neural Network exploration in cancer detection application
+This project explores Convolutional Neural Networks (CNN) in a cancer detection application.
+
+This was a mini-project in CU Boulder's DTSA 5511 Introduction to Neural Networks course. The project goal was to binary classify the presence of cancer in images of metastatic tissue. The dataset is sourced from the [Kaggle Histopathologic Cancer Detection Competition](https://www.kaggle.com/competitions/histopathologic-cancer-detection/).
+
+The project is structured using a base model made up of a repeating convolution structure (convolution layers with subsampling convolution layers with stride as pooling layers) followed by a densely connected classification structure.
+
+The base model first compares the effects of training with the full dataset (220,000+ images) or a balanced subset (50,000 images). Results indicated the balanced subset adequately described the dataset, without dramatic differences in model performance. The base model was then tuned, evaluating the effect of increasing batch size and number of training epochs. Increasing batch size yielded no improvement since the initial batch size sufficiently reduced noise, and the increased batch size meant a reduction in model updates. Increasing the number of epochs indicated when the model began overfitting.
+
+The base model was then modified to represent alternative architectures. These modifications included replacing convolution subsampling with MaxPool, implementing batch normalization and droupout as regularization techniques, and creating a deeper network by increasing convolution filters and adding layers to the classifier structure. MaxPooling performed similar to the base model, which indicates MaxPooling was preferable since it is a simpler model. Regularization techniques surprisingly caused more overfitting, but poor experimental design cannot identify if batch norm, dropout, or both caused the issue. Finally the deeper model learned faster but without better performace, but also began to overfit more rapidly. Like MaxPooling, the simpler base model is superior to the deeper model for similar performance.
+
+Future work could consider precise comparison between training sample variety and sample repetition (for example, 1 epoch of 20,0000 samples, or 4 epochs of 50,000 samples). Models can be improved with automatic learning rate reduction, and callbacks to stop training early could be implemented for efficiency. For future experimentation, a simpler model gradually built upon would be more insightful and faster to iterate than starting with a relatively complex model.
